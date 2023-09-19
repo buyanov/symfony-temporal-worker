@@ -6,14 +6,8 @@
 
     <services>
         <service
-            id="temporal.worker"
-            class="Buyanov\SymfonyTemporalWorker\Temporal\TemporalWorker"
-        >
-            <argument type="service" id="service_container"/>
-        </service>
-        <service
                 id="temporal.client.factory"
-                class="Temporal\Client\WorkflowClientInterface"
+                class="\Temporal\Client\WorkflowClientInterface"
                 public="false"
         >
             <argument type="string"/> <!-- will be filled in with dsn dynamically -->
@@ -21,10 +15,10 @@
         </service>
         <service
                 id="temporal.worker.command"
-                class="Buyanov\SymfonyTemporalWorker\Command\TemporalWorkerCommand"
+                class="\Buyanov\SymfonyTemporalWorker\Command\TemporalWorkerCommand"
                 public="false"
         >
-            <argument type="service" id="temporal.worker"/>
+            <argument type="service" id="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorkerInterface"/>
             <tag name="console.command"/>
         </service>
     </services>
