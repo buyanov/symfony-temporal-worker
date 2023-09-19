@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service
+                id="\Buyanov\TemporalMessenger\Transport\WorkflowClientFactory"
+                class="\Buyanov\TemporalMessenger\Transport\WorkflowClientFactory"
+                public="false"
+        />
+        <service
+                id="\Buyanov\TemporalMessenger\Transport\TemporalTransportFactory"
+                class="\Buyanov\TemporalMessenger\Transport\TemporalTransportFactory"
+                public="false"
+        >
+            <tag name="messenger.transport_factory"/>
+        </service>
+        <service
+                id="\Buyanov\TemporalMessenger\Command\TemporalWorkerCommand"
+                class="\Buyanov\TemporalMessenger\Command\TemporalWorkerCommand"
+                public="false"
+        >
+            <argument type="service" id="Buyanov\TemporalMessenger\Temporal\Worker\TemporalWorkerInterface"/>
+            <tag name="console.command"/>
+        </service>
+    </services>
+</container>
