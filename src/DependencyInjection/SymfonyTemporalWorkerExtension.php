@@ -23,6 +23,8 @@ class SymfonyTemporalWorkerExtension extends Extension
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('temporal.worker.factory');
+        $definition = $container->getDefinition('temporal.client.factory');
+        $definition->replaceArgument(0, $config['worker']['dsn']);
+        $definition->replaceArgument(1, $config['worker']['namespace']);
     }
 }
