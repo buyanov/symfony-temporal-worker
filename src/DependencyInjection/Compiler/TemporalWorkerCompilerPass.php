@@ -12,7 +12,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class TemporalWorkerCompilerPass implements CompilerPassInterface
 {
-
     public function process(ContainerBuilder $container): void
     {
         $definition = $container

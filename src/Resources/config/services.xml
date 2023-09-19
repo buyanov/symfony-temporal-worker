@@ -6,23 +6,25 @@
 
     <services>
         <service
-                id="\Buyanov\TemporalMessenger\Transport\WorkflowClientFactory"
-                class="\Buyanov\TemporalMessenger\Transport\WorkflowClientFactory"
-                public="false"
-        />
-        <service
-                id="\Buyanov\TemporalMessenger\Transport\TemporalTransportFactory"
-                class="\Buyanov\TemporalMessenger\Transport\TemporalTransportFactory"
-                public="false"
+            id="temporal.worker"
+            class="Buyanov\SymfonyTemporalWorker\Temporal\TemporalWorker"
         >
-            <tag name="messenger.transport_factory"/>
+            <factory service="temporal.worker.factory" method="create"/>
         </service>
         <service
-                id="\Buyanov\TemporalMessenger\Command\TemporalWorkerCommand"
-                class="\Buyanov\TemporalMessenger\Command\TemporalWorkerCommand"
+                id="temporal.worker.factory"
+                class="Buyanov\SymfonyTemporalWorker\Temporal\WorkflowClientFactory"
                 public="false"
         >
-            <argument type="service" id="Buyanov\TemporalMessenger\Temporal\Worker\TemporalWorkerInterface"/>
+            <argument type="string"/> <!-- will be filled in with dsn dynamically -->
+            <argument type="string"/> <!-- will be filled in with namespace dynamically -->
+        </service>
+        <service
+                id="temporal.worker.command"
+                class="Buyanov\SymfonyTemporalWorker\Command\TemporalWorkerCommand"
+                public="false"
+        >
+            <argument type="service" id="temporal.worker"/>
             <tag name="console.command"/>
         </service>
     </services>

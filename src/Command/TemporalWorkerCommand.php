@@ -12,9 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(
-    name: 'temporal:worker:run'
-)]
+#[AsCommand(name: 'temporal:worker:run')]
 final class TemporalWorkerCommand extends Command
 {
     private TemporalWorkerInterface $worker;
@@ -29,7 +27,7 @@ final class TemporalWorkerCommand extends Command
     public function configure(): void
     {
         $this
-            ->addArgument('queue', null, 'The queue of the messages being dispatched', 'messages')
+            ->addArgument('queue', null, 'The queue of the messages being dispatched', 'default')
             ->setDescription('Run the roadrunner temporal worker')
             ->setHelp(<<<'EOF'
                 This command should not be run manually but specified in a <info>.rr.yaml</info>
@@ -56,6 +54,7 @@ final class TemporalWorkerCommand extends Command
 
                 temporal:
                     address: temporal:7233
+                    namespace: default
                     activities:
                         num_workers: 5
                     codec: json

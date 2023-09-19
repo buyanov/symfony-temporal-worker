@@ -1,13 +1,15 @@
 {
     "name": "buyanov/symfony-temporal-worker",
     "description": "Temporal worker for symfony app",
-    "type": "temporal-worker",
+    "type": "symfony-bundle",
+    "version": "0.0.4",
     "require": {
         "php": ">=8.0",
         "ext-grpc": "*",
         "ext-protobuf": "*",
         "temporal/sdk": "^2.6",
-        "symfony/framework-bundle": "^6.3"
+        "symfony/framework-bundle": "^6",
+        "spiral/roadrunner": "^2023.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.3"
@@ -21,7 +23,7 @@
     "authors": [
         {
             "name": "d.buyanov",
-            "email": "d.buyanov@tool-kit.tech"
+            "email": "info@saity74.ru"
         }
     ],
     "minimum-stability": "stable"

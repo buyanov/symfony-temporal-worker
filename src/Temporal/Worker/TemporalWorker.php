@@ -7,7 +7,6 @@ namespace Buyanov\SymfonyTemporalWorker\Temporal\Worker;
 use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Temporal\Worker\WorkerFactoryInterface;
-use Temporal\Worker\WorkerOptions;
 use Temporal\WorkerFactory;
 
 final class TemporalWorker implements TemporalWorkerInterface
@@ -25,14 +24,13 @@ final class TemporalWorker implements TemporalWorkerInterface
     private ContainerInterface $container;
 
     /**
-     * @param ContainerInterface  $container
+     * @param ContainerInterface $container
      */
     public function __construct(
         ContainerInterface $container,
     ) {
-        $this->container  = $container;
-
-        $this->factory = WorkerFactory::create();
+        $this->container = $container;
+        $this->factory   = WorkerFactory::create();
     }
 
     public function start(string $queue = 'default'): void

@@ -11,12 +11,12 @@ use Temporal\Client\WorkflowClientInterface;
 
 class WorkflowClientFactory
 {
-    public static function create(string $dsn, array $options): WorkflowClientInterface
+    public static function create(string $dsn = 'localhost:7233', string $namespace = 'default'): WorkflowClientInterface
     {
         return WorkflowClient::create(
             ServiceClient::create($dsn),
             (new ClientOptions())
-                ->withNamespace($options['namespace'])
+                ->withNamespace($namespace)
         );
     }
 }
