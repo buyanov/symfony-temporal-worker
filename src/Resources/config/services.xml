@@ -6,6 +6,11 @@
 
     <services>
         <service
+                id="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorkerInterface"
+                class="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorker"
+                public="false"
+        />
+        <service
                 id="temporal.client.factory"
                 class="\Temporal\Client\WorkflowClientInterface"
                 public="false"
