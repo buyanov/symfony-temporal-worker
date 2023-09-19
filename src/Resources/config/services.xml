@@ -9,7 +9,9 @@
                 id="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorkerInterface"
                 class="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorker"
                 public="false"
-        />
+        >
+            <argument type="service" id="service_container" />
+        </service>
         <service
                 id="temporal.client.factory"
                 class="\Temporal\Client\WorkflowClientInterface"
