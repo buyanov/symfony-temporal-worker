@@ -9,11 +9,11 @@
             id="temporal.worker"
             class="Buyanov\SymfonyTemporalWorker\Temporal\TemporalWorker"
         >
-            <factory service="temporal.worker.factory" method="create"/>
+            <argument type="service" id="service_container"/>
         </service>
         <service
-                id="temporal.worker.factory"
-                class="Buyanov\SymfonyTemporalWorker\Temporal\WorkflowClientFactory"
+                id="temporal.client.factory"
+                class="Temporal\Client\WorkflowClientInterface"
                 public="false"
         >
             <argument type="string"/> <!-- will be filled in with dsn dynamically -->
