@@ -6,7 +6,7 @@
 
     <services>
         <service
-                id="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorkerInterface"
+                id="temporal.worker"
                 class="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorker"
                 public="false"
         >
@@ -25,7 +25,7 @@
                 class="\Buyanov\SymfonyTemporalWorker\Command\TemporalWorkerCommand"
                 public="false"
         >
-            <argument type="service" id="\Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorkerInterface"/>
+            <argument type="service" id="temporal.worker"/>
             <tag name="console.command"/>
         </service>
     </services>
