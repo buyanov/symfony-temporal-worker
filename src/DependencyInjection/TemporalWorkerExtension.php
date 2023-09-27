@@ -21,7 +21,7 @@ class TemporalWorkerExtension extends Extension
         $loader->load('services.xml');
 
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         $definition = $container->getDefinition('temporal.worker.factory');
         $definition->replaceArgument(0, $config['worker']['dsn']);

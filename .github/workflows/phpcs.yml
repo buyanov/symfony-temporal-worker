@@ -11,4 +11,4 @@ jobs:
       - name: PHP-CS-Fixer
         uses: docker://cytopia/php-cs-fixer:3-php8.1
         with:
-          args: fix ./src --diff -v --config=.php-cs-fixer.dist.php
+          args: fix ./src --diff --dry-run -v --config=.php-cs-fixer.dist.php
