@@ -15,13 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'temporal:worker:run')]
 final class TemporalWorkerCommand extends Command
 {
-    private TemporalWorkerInterface $worker;
-
-    public function __construct(TemporalWorkerInterface $worker)
+    public function __construct(private TemporalWorkerInterface $worker)
     {
         parent::__construct();
-
-        $this->worker = $worker;
     }
 
     public function configure(): void
