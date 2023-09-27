@@ -5,14 +5,16 @@ declare(strict_types=1);
 use Buyanov\SymfonyTemporalWorker\Command\TemporalWorkerCommand;
 use Buyanov\SymfonyTemporalWorker\Temporal\Worker\TemporalWorker;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Temporal\Client\WorkflowClientInterface;
-use Temporal\WorkerFactory;
-use Temporal\Testing\WorkerFactory as TestingWorkerFactory;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
+
+use Temporal\Client\WorkflowClientInterface;
+use Temporal\Testing\WorkerFactory as TestingWorkerFactory;
+use Temporal\WorkerFactory;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
-    $env = $containerConfigurator->env();
+    $env      = $containerConfigurator->env();
 
     $workerFactoryClass = ($env === 'test')
         ? TestingWorkerFactory::class
