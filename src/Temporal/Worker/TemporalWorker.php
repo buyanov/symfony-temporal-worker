@@ -7,11 +7,9 @@ namespace Buyanov\SymfonyTemporalWorker\Temporal\Worker;
 use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Temporal\Worker\WorkerFactoryInterface;
-use Temporal\WorkerFactory;
 
 final class TemporalWorker implements TemporalWorkerInterface
 {
-    private WorkerFactoryInterface $factory;
     /**
      * @var array<class-string> $workflows
      */
@@ -21,21 +19,16 @@ final class TemporalWorker implements TemporalWorkerInterface
      * @var array<class-string> $activities
      */
     private array $activities = [];
-    private ContainerInterface $container;
 
-    /**
-     * @param ContainerInterface $container
-     */
     public function __construct(
-        ContainerInterface $container,
+        private ContainerInterface $container,
+        private WorkerFactoryInterface $workerFactory
     ) {
-        $this->container = $container;
-        $this->factory   = WorkerFactory::create();
     }
 
     public function start(string $queue = 'default'): void
     {
-        $worker = $this->factory->newWorker($queue);
+        $worker = $this->workerFactory->newWorker($queue);
         $worker->registerWorkflowTypes(...$this->workflows);
 
         foreach ($this->activities as $activity) {
@@ -45,7 +38,7 @@ final class TemporalWorker implements TemporalWorkerInterface
             );
         }
 
-        $this->factory->run();
+        $this->workerFactory->run();
     }
 
     public function addActivity(string $className): void
