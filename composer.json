@@ -2,7 +2,7 @@
     "name": "buyanov/symfony-temporal-worker",
     "description": "Temporal worker for symfony app",
     "type": "symfony-bundle",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "require": {
         "php": ">=8.0",
         "ext-grpc": "*",
