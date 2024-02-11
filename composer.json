@@ -8,7 +8,7 @@
         "ext-grpc": "*",
         "ext-protobuf": "*",
         "temporal/sdk": "^2.6",
-        "symfony/framework-bundle": "^6",
+        "symfony/framework-bundle": "^6.0 || ^7.0",
         "spiral/roadrunner": "^2023.2"
     },
     "require-dev": {
