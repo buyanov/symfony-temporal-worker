@@ -7,7 +7,7 @@
         "php": ">=8.0",
         "ext-grpc": "*",
         "ext-protobuf": "*",
-        "temporal/sdk": "^2.6",
+        "temporal/sdk": "^2.7",
         "symfony/framework-bundle": "^6.0 || ^7.0",
         "spiral/roadrunner": "^2023.2"
     },
