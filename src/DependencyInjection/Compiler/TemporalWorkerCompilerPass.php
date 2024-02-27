@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Buyanov\SymfonyTemporalWorker\DependencyInjection\Compiler;
 
+use Buyanov\SymfonyTemporalWorker\Attribute\ActivityInboundInterceptor;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -24,6 +25,13 @@ class TemporalWorkerCompilerPass implements CompilerPassInterface
 
         foreach ($taggedWorkflows as $id => $tags) {
             $definition->addMethodCall('addWorkflow', [$id]);
+        }
+
+        $taggedInterceptors = $container->findTaggedServiceIds(ActivityInboundInterceptor::TAG);
+
+        foreach ($taggedInterceptors as $id => $tags) {
+            $container->findDefinition($id)->setPublic(true);
+            $definition->addMethodCall('addInterceptor', [$id]);
         }
     }
 }

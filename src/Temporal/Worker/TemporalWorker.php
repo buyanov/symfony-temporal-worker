@@ -6,6 +6,7 @@ namespace Buyanov\SymfonyTemporalWorker\Temporal\Worker;
 
 use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Temporal\Interceptor\SimplePipelineProvider;
 use Temporal\Worker\WorkerFactoryInterface;
 
 final class TemporalWorker implements TemporalWorkerInterface
@@ -20,6 +21,11 @@ final class TemporalWorker implements TemporalWorkerInterface
      */
     private array $activities = [];
 
+    /**
+     * @var array<class-string> $interceptors
+     */
+    private array $interceptors = [];
+
     public function __construct(
         private ContainerInterface $container,
         private WorkerFactoryInterface $workerFactory
@@ -28,7 +34,15 @@ final class TemporalWorker implements TemporalWorkerInterface
 
     public function start(string $queue = 'default'): void
     {
-        $worker = $this->workerFactory->newWorker($queue);
+        $preparedInterceptors = [];
+        foreach ($this->interceptors as $interceptor) {
+            $preparedInterceptors[] = $this->container->get($interceptor);
+        }
+
+        $simplePipelineProvider = new SimplePipelineProvider($preparedInterceptors);
+
+        $worker = $this->workerFactory->newWorker($queue, interceptorProvider: $simplePipelineProvider);
+
         $worker->registerWorkflowTypes(...$this->workflows);
 
         foreach ($this->activities as $activity) {
@@ -49,5 +63,10 @@ final class TemporalWorker implements TemporalWorkerInterface
     public function addWorkflow(string $className): void
     {
         $this->workflows[] = $className;
+    }
+
+    public function addInterceptor(string $className): void
+    {
+        $this->interceptors[] = $className;
     }
 }
